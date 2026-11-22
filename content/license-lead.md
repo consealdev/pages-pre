@@ -1,0 +1,1 @@
+The full text of the AGPL is at [gnu.org](https://www.gnu.org/licenses/agpl-3.0.html), and each package carries it as its LICENSE file: [conseal-js](https://github.com/consealdev/conseal-js/blob/main/LICENSE) and [conseal-dotnet](https://github.com/consealdev/conseal-dotnet/blob/main/LICENSE). The docs say [which license an app needs](/docs/start/license/).

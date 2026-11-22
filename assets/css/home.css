@@ -1,0 +1,27 @@
+/* The home page's own rules, on top of relayout.css, pages-base.css and brand.css. Layout is Relayout's classes in
+   the markup; what is here is what they don't cover. */
+
+/* ── Narrow screens ──
+   Below 350px the page keeps its width and scrolls sideways, in place of squeezing the demo's tabs, its title bar and its
+   fields further. The fixed header is as wide as the window and has room. */
+body > main,
+body > footer {
+    min-width: 350px;
+}
+
+/* ── Highlights ──
+   A class name or an element is read whole, so a chip doesn't break at its hyphens */
+.doc-card-body code {
+    white-space: nowrap;
+}
+
+/* ── Package tiles ──
+   The names of the SDK tiles are links, as the registry names under them are, so they take the brand colour on hover
+   too. This is the site's own rule: pages-base.css is a copy of the shared file and isn't edited here. */
+a.sdk-item-name {
+    transition: color .15s;
+}
+
+a.sdk-item-name:hover {
+    color: var(--brand-text);
+}

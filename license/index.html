@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <script>
+        // The docs' theme choice (docs-site/src/theme.ts), set before the page paints: the cs-theme cookie, then
+        // localStorage, and dark when neither holds one
+        try
+        {
+            const stored = document.cookie.split('; ').find(c => c.startsWith('cs-theme='))?.split('=')[1] ?? localStorage.getItem('cs-theme');
+            if (stored === 'light') document.documentElement.dataset.theme = 'light';
+        }
+        catch
+        {
+            // Storage is blocked: the page stays dark
+        }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conseal — License</title>
+    <meta name="description" content="The Conseal License: the GNU AGPL, version 3 or any later version, or the Conseal Commercial License for closed-source apps, with its terms." />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="../assets/css/relayout.css" />
+    <link rel="stylesheet" href="../assets/css/pages-base.css" />
+    <link rel="stylesheet" href="../assets/css/brand.css" />
+    <script type="module" src="../assets/js/home.js"></script>
+</head>
+<body class="page-legal">
+    <nav class="nav">
+        <div class="nav-inner rl-row rl-nowrap rl-justify-between">
+            <a href="../" class="nav-logo">
+                <img src="../assets/images/conseal-mark.svg" alt="" class="nav-logo-mark" />
+                <span class="nav-logo-word" translate="no">Conseal</span>
+            </a>
+            <button type="button" class="theme-btn" aria-label="Toggle theme" title="Toggle theme">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,16.37a86.4,86.4,0,0,1,16,3V212.67a86.4,86.4,0,0,1-16,3Zm32,9.26a87.81,87.81,0,0,1,16,10.54V195.83a87.81,87.81,0,0,1-16,10.54ZM40,128a88.11,88.11,0,0,1,80-87.63V215.63A88.11,88.11,0,0,1,40,128Zm160,50.54V77.46a87.82,87.82,0,0,1,0,101.08Z"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container rl-column rl-gap-2xl rl-padding-2xl">
+            <md-html>
+<h1>Conseal Commercial License</h1>
+<p>Copyright © 2026 Codesense LLC</p>
+<p>License inquiries: <a href="mailto:license@conseal.dev">license@conseal.dev</a></p>
+<p><code>conseal</code> is dual-licensed under the GNU Affero General Public License, version 3 or any later version (the &quot;AGPL&quot;), and this Commercial License. This file describes the commercial license.</p>
+<p>The full text of the AGPL is at <a href="https://www.gnu.org/licenses/agpl-3.0.html">gnu.org</a>, and each package carries it as its LICENSE file: <a href="https://github.com/consealdev/conseal-js/blob/main/LICENSE">conseal-js</a> and <a href="https://github.com/consealdev/conseal-dotnet/blob/main/LICENSE">conseal-dotnet</a>. The docs say <a href="/docs/start/license/">which license an app needs</a>.</p>
+
+<h2>The Software</h2>
+<p>&quot;The Software&quot; means conseal&#39;s SDKs, in source and built form:</p>
+<ul>
+<li>conseal-js, published as <code>@consealdev/conseal</code>, including its <code>/sync</code> and <code>/ui</code> entry points</li>
+<li>conseal-dotnet, the sync backend, published as <code>ConsealDev.Conseal</code></li>
+</ul>
+<p>One commercial license covers both SDKs. The conseal spec is published separately under the MIT License and needs no commercial license.</p>
+<h3>Definitions</h3>
+<p>&quot;Production environment&quot; means any environment in which the Software processes real user data or supports live business operations, including staging environments accessible by end users.</p>
+<p>&quot;Production App&quot; means a distinct, independently operated application or automated workflow that uses the Software in a production environment, where &quot;independently operated&quot; means it serves a separate and identifiable purpose, user base, or business function. For the avoidance of doubt: multiple delivery channels (web, mobile, desktop, API) of the same application serving the same purpose and user base constitute a single Production App; the Software&#39;s sync backend, when it serves only one Production App&#39;s end users, is part of that Production App; all internal business tooling of an organization where the organization&#39;s own personnel are the sole end users constitutes a single Production App regardless of the number of internal tools or services involved; a service or component that operates exclusively as part of a larger application and has no independent production deployment is not a separate Production App.</p>
+<h2>When You Need a Commercial License</h2>
+<p>A commercial license is required if you use <code>conseal</code> in:</p>
+<ul>
+<li>A proprietary or closed-source application</li>
+<li>A SaaS product or web service whose source code is not publicly available under a compatible open-source license</li>
+<li>Any product or service where you cannot comply with the terms of the AGPL</li>
+</ul>
+<p>If your application is fully open source under the AGPL or a compatible license, you do not need a commercial license.</p>
+<h3>Permitted Use</h3>
+<p>The Software is licensed for use in Production Apps that protect and sync the licensee&#39;s own end users&#39; data. The Software may not be used to build or operate a hosted sync, backup, or key management service whose purpose is to provide that infrastructure to third-party applications or organizations for their own end users. Using the Software as the underlying infrastructure for a product that other developers or organizations plug into to protect or sync their users&#39; data is outside the scope of all license tiers.</p>
+<h3>Transitive Dependency</h3>
+<p>If <code>conseal</code> is pulled in as an indirect dependency of another library or framework rather than used directly in your project, the terms of the AGPL apply automatically and no commercial license is required solely on that basis.</p>
+<p>This exemption does not apply if the dependency was introduced, created, or controlled by the licensee&#39;s organization for the purpose of circumventing license requirements.</p>
+<h2>License Tiers</h2>
+<p>All tiers receive the complete feature set — no capabilities are gated behind paid plans.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Who</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Indie</strong></td>
+<td>Solo developers, small apps</td>
+<td>Flat annual fee, one Production App</td>
+</tr>
+<tr>
+<td><strong>Business</strong></td>
+<td>Companies, multiple products</td>
+<td>Annual fee per Production App</td>
+</tr>
+<tr>
+<td><strong>Enterprise</strong></td>
+<td>Large organisations, regulated industries</td>
+<td>Custom pricing, SLA, legal indemnification</td>
+</tr>
+</tbody></table>
+<h2>License Grant</h2>
+<p>Subject to payment of the applicable license fee, Codesense LLC grants the licensee a non-exclusive, worldwide, royalty-free license to:</p>
+<ul>
+<li>Use, copy, modify, and integrate the Software into the Production Apps covered by the purchased tier</li>
+<li>Deploy the Software across any number of servers, environments, and infrastructure serving those Production Apps</li>
+<li>Distribute the Software as a component of those Production Apps</li>
+</ul>
+<p>without obligation to publish the licensee&#39;s application source code and without the copyleft requirements of the AGPL.</p>
+<p>A separate license is required for each additional Production App in which the licensee uses the Software in a production environment. Development, staging, and test environments that exist solely to support a licensed Production App are covered under the same license as that Production App and do not require separate licenses.</p>
+<h3>Evaluation</h3>
+<p>Evaluation and testing in non-production environments is permitted without a commercial license for a period not exceeding 30 days.</p>
+<h3>License Fees and Renewal</h3>
+<p>Upon payment, the licensee receives a perpetual license for the version of <code>conseal</code> current at the time of purchase, plus one year of updates and security patches. Continued access to new versions after the first year requires annual renewal. Cancellation of renewal does not affect the perpetual license for the version already held.</p>
+<h2>Ownership and Modifications</h2>
+<p>Codesense LLC retains all ownership, copyright, and intellectual property rights in the Software at all times. This license grants rights to use the Software; it does not transfer ownership of any kind.</p>
+<p>All modifications to the Software made by the licensee remain the intellectual property of the licensee. Codesense LLC claims no ownership over licensee modifications.</p>
+<p>All copies, modifications, and distributions of the Software must retain the original copyright notice. Licensees may not remove, alter, or obscure any copyright, trademark, or attribution notices included in the Software.</p>
+<h2>Conduct</h2>
+<p>License rights may not be rented, leased, or transferred to any third party without prior written consent from Codesense LLC.</p>
+<p>Licensees agree not to make false statements of fact about <code>conseal</code>, Codesense LLC, or its contributors that are intended to cause material harm to the reputation of the project or the company. This clause does not restrict good-faith criticism, bug reports, public discussion of software deficiencies, or reviews based on the licensee&#39;s genuine experience.</p>
+<h2>Data and Privacy</h2>
+<p>Codesense LLC does not collect, process, or retain any data that the licensee processes through the Software. <code>conseal</code> encrypts data on the devices of the licensee&#39;s end users, and its sync backend runs on infrastructure the licensee operates. For more information, see the Codesense LLC Privacy Policy at <a href="https://my.codesense.dev/privacy">my.codesense.dev/privacy</a>.</p>
+<h2>Export Compliance</h2>
+<p>The Software implements cryptographic functionality and may be subject to export control laws and regulations, including the U.S. Export Administration Regulations (EAR) and sanctions programs administered by OFAC. The licensee is solely responsible for complying with all applicable export control and sanctions laws in connection with the licensee&#39;s use of the Software.</p>
+<h2>Disclaimer of Warranty</h2>
+<p>THIS SOFTWARE IS PROVIDED &quot;AS IS,&quot; WITHOUT A WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL CODESENSE LLC OR ITS CONTRIBUTORS BE LIABLE FOR ANY CLAIM, DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. IN NO EVENT SHALL CODESENSE LLC&#39;S TOTAL CUMULATIVE LIABILITY TO ANY PARTY EXCEED THE GREATER OF (A) THE FEES PAID BY THAT PARTY TO CODESENSE LLC IN THE TWELVE MONTHS PRECEDING THE CLAIM, OR (B) ONE HUNDRED US DOLLARS (USD 100).</p>
+<h2>Governing Law and Dispute Resolution</h2>
+<p>This license is governed by and construed in accordance with the laws of the State of Texas, United States, without regard to its conflict of law provisions.</p>
+<p>Any dispute arising out of or relating to this license or the Software shall be resolved by binding arbitration administered by the American Arbitration Association under its Commercial Arbitration Rules. The arbitration shall take place in Plano, Texas. Judgment on the award rendered by the arbitrator may be entered in any court of competent jurisdiction.</p>
+<p>Notwithstanding the foregoing, either party may seek injunctive or other equitable relief in any court of competent jurisdiction to prevent the actual or threatened infringement, misappropriation, or violation of a party&#39;s intellectual property rights.</p>
+<p>For license purchases and inquiries: <strong><a href="mailto:license@conseal.dev">license@conseal.dev</a></strong></p>
+
+            </md-html>
+        </div>
+    </main>
+
+    <footer>
+        <!-- The product sites' footer (product-footer in the portal): no .container, so the columns line up under
+             the header's logo, inside the same gutter -->
+        <div class="footer-columns">
+            <div class="rl-grid rl-grid-fit-m rl-gap-xl">
+                <div class="rl-column rl-gap-s">
+                    <a href="../" class="footer-logo">
+                        <img src="../assets/images/conseal-mark.svg" alt="" class="footer-logo-mark" />
+                        <span class="footer-logo-word" translate="no">Conseal</span>
+                    </a>
+                    <p class="footer-tagline">Privacy as design</p>
+                </div>
+                <div class="rl-column rl-gap-s">
+                    <span class="footer-heading">Packages</span>
+                    <div class="rl-column rl-gap-m footer-links">
+                        <a href="../docs/core/overview/">JavaScript</a>
+                        <a href="../docs/dotnet/overview/">ASP.NET Core</a>
+                    </div>
+                </div>
+                <div class="rl-column rl-gap-s">
+                    <span class="footer-heading">Documentation</span>
+                    <div class="rl-column rl-gap-m footer-links">
+                        <a href="../docs/start/introduction/">Introduction</a>
+                        <a href="../docs/concepts/keys/">Concepts</a>
+                        <a href="../docs/security/threat-model/">Threat model</a>
+                        <a href="../docs/api/overview/">API</a>
+                    </div>
+                </div>
+                <div class="rl-column rl-gap-s">
+                    <span class="footer-heading">Company</span>
+                    <div class="rl-column rl-gap-m footer-links">
+                        <a href="../license/">License</a>
+                        <a href="https://my.codesense.dev/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+                        <a href="https://my.codesense.dev/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-baseline">
+            <p class="footer-copy">© 2026 Codesense LLC</p>
+        </div>
+    </footer>
+</body>
+</html>

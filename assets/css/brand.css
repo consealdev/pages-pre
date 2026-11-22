@@ -1,0 +1,27 @@
+/* Conseal's brand, on top of pages-base.css.
+
+   --brand is the colour of logos/dist/conseal-mark.svg (PRODUCT_COLOR.conseal in logos/bin/brand.mjs). The other
+   three are measured against the surfaces in pages-base.css by logos/bin/check-site-tones.mjs, which fails if
+   any slips under its bar:
+
+       --brand        3:1 as a graphic on every surface
+       --brand-text   4.5:1 as text on every light surface, and again on every dark one
+       --brand-on     4.5:1 against the --brand fill
+
+   The violet clears 3:1 as a mark on every surface, 3.48 at the lowest (--bg-alt, light), so --brand stays as the
+   mark has it. As text it has to go darker on light (#5a5dc9, 4.82 at the lowest) and lighter on dark (#8588e2,
+   4.78). The label on a --brand fill is near black (#0d0e26, 4.81): white on the violet is 3.94. */
+:root {
+    --brand: #7376da;
+    --brand-text: #5a5dc9;
+    --brand-on: #0d0e26;
+}
+
+[data-theme="dark"] {
+    --brand-text: #8588e2;
+    /* The shared dark --text-subtle (pages-base.css, #797d83) is 3.67 to 4.42 across the surfaces, under the 4.5:1 that
+       the footer's links and copyright, the section label and a legal page's masthead need. This site's own tone until
+       the shared one is fixed (pages-base.css's header notes the gap): 4.61 on --bg-elev, the lightest surface, and 4.97
+       to 6.03 on the others. Here and not in home.css, so every page of the site has it. */
+    --text-subtle: #8a8e95;
+}

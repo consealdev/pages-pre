@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <script>
+        // The docs' theme choice (docs-site/src/theme.ts), set before the page paints: the cs-theme cookie, then
+        // localStorage, and dark when neither holds one
+        try
+        {
+            const stored = document.cookie.split('; ').find(c => c.startsWith('cs-theme='))?.split('=')[1] ?? localStorage.getItem('cs-theme');
+            if (stored === 'light') document.documentElement.dataset.theme = 'light';
+        }
+        catch
+        {
+            // Storage is blocked: the page stays dark
+        }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conseal — Zero-Knowledge Sync</title>
+    <meta name="description" content="Conseal seals your web app's data on the user's device and syncs it across their devices through a server that only ever sees ciphertext." />
+    <link rel="canonical" href="https://conseal.dev/" />
+    <meta property="og:title" content="Conseal — Zero-Knowledge Sync" />
+    <meta property="og:description" content="Conseal seals your web app's data on the user's device and syncs it across their devices through a server that only ever sees ciphertext." />
+    <meta property="og:url" content="https://conseal.dev/" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="assets/css/relayout.css" />
+    <link rel="stylesheet" href="assets/css/pages-base.css" />
+    <link rel="stylesheet" href="assets/css/brand.css" />
+    <link rel="stylesheet" href="assets/css/home.css" />
+    <link rel="stylesheet" href="assets/css/demo.css" />
+    <script type="module" src="assets/js/home.js"></script>
+    <script type="module" src="assets/js/demo.js"></script>
+    <script defer src="assets/js/analytics.js" data-client-id="b678409d-e7ca-4c60-bb88-c0c8a802aaf1"></script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner rl-row rl-nowrap rl-justify-between">
+            <a href="./" class="nav-logo">
+                <img src="assets/images/conseal-mark.svg" alt="" class="nav-logo-mark" />
+                <span class="nav-logo-word" translate="no">Conseal</span>
+            </a>
+            <button type="button" class="theme-btn" aria-label="Toggle theme" title="Toggle theme">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,16.37a86.4,86.4,0,0,1,16,3V212.67a86.4,86.4,0,0,1-16,3Zm32,9.26a87.81,87.81,0,0,1,16,10.54V195.83a87.81,87.81,0,0,1-16,10.54ZM40,128a88.11,88.11,0,0,1,80-87.63V215.63A88.11,88.11,0,0,1,40,128Zm160,50.54V77.46a87.82,87.82,0,0,1,0,101.08Z"></path></svg>
+            </button>
+        </div>
+    </nav>
+
+    <main class="rl-column">
+        <section class="section section-hero">
+            <div class="hero-glow"></div>
+            <div class="container rl-column rl-gap-2xl">
+                <div class="rl-column rl-align-center rl-text-center rl-gap-l">
+                    <div class="rl-row rl-gap-s rl-justify-center">
+                        <span class="badge">Pre-release</span>
+                    </div>
+                    <h1 class="section-title section-title--hero">
+                        <span class="hero-title">Privacy as design</span>
+                    </h1>
+                    <p class="section-body">Zero-knowledge sync for your web app.<br />Data is sealed on the device with a key only the user holds.<br />The server stores ciphertext it can't open.</p>
+                </div>
+
+                <div class="rl-row rl-gap-m rl-justify-center">
+                    <a href="docs/" class="btn btn-brand btn-lg">Documentation</a>
+                </div>
+
+                <div class="rl-column rl-gap-xl rl-align-center rl-text-center">
+                    <p class="hero-note">A JavaScript package for the browser,<br />and an ASP.NET Core backend to sync against.</p>
+                    <div class="sdk-strip">
+                        <div class="sdk-item">
+                            <svg class="sdk-icon-fa sdk-icon-glyph" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" aria-hidden="true"><path d="M392.8 65.2C375.8 60.3 358.1 70.2 353.2 87.2L225.2 535.2C220.3 552.2 230.2 569.9 247.2 574.8C264.2 579.7 281.9 569.8 286.8 552.8L414.8 104.8C419.7 87.8 409.8 70.1 392.8 65.2zM457.4 201.3C444.9 213.8 444.9 234.1 457.4 246.6L530.8 320L457.4 393.4C444.9 405.9 444.9 426.2 457.4 438.7C469.9 451.2 490.2 451.2 502.7 438.7L598.7 342.7C611.2 330.2 611.2 309.9 598.7 297.4L502.7 201.4C490.2 188.9 469.9 188.9 457.4 201.4zM182.7 201.3C170.2 188.8 149.9 188.8 137.4 201.3L41.4 297.3C28.9 309.8 28.9 330.1 41.4 342.6L137.4 438.6C149.9 451.1 170.2 451.1 182.7 438.6C195.2 426.1 195.2 405.8 182.7 393.3L109.3 320L182.6 246.6C195.1 234.1 195.1 213.8 182.6 201.3z"/></svg>
+                            <a class="sdk-item-name" href="https://github.com/consealdev/conseal-js" target="_blank" rel="noopener noreferrer" aria-label="JavaScript SDK on GitHub">JavaScript</a>
+                            <span class="sdk-item-links">
+                                <a href="https://www.npmjs.com/package/@consealdev/conseal" target="_blank" rel="noopener noreferrer">npm</a>
+                            </span>
+                        </div>
+                        <div class="sdk-item">
+                            <svg class="sdk-icon-fa sdk-icon-glyph" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor" aria-hidden="true"><path d="M278.7 64.7C296 68.4 307 85.4 303.3 102.7L284.2 192L410.7 192L432.7 89.3C436.4 72 453.4 61 470.7 64.7C488 68.4 499 85.4 495.3 102.7L476.2 192L544 192C561.7 192 576 206.3 576 224C576 241.7 561.7 256 544 256L462.4 256L435 384L502.8 384C520.5 384 534.8 398.3 534.8 416C534.8 433.7 520.5 448 502.8 448L421.2 448L399.2 550.7C395.5 568 378.5 579 361.2 575.3C343.9 571.6 332.9 554.6 336.6 537.3L355.7 448L229.2 448L207.2 550.7C203.5 568 186.5 579 169.2 575.3C151.9 571.6 140.9 554.6 144.6 537.3L163.8 448L96 448C78.3 448 64 433.7 64 416C64 398.3 78.3 384 96 384L177.6 384L205 256L137.2 256C119.5 256 105.2 241.7 105.2 224C105.2 206.3 119.5 192 137.2 192L218.8 192L240.8 89.3C244.4 72 261.4 61 278.7 64.7zM270.4 256L243 384L369.5 384L396.9 256L270.4 256z"/></svg>
+                            <a class="sdk-item-name" href="https://github.com/consealdev/conseal-dotnet" target="_blank" rel="noopener noreferrer" aria-label="ASP.NET Core backend on GitHub">ASP.NET Core</a>
+                            <span class="sdk-item-links">
+                                <a href="https://www.nuget.org/packages/ConsealDev.Conseal" target="_blank" rel="noopener noreferrer">NuGet</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rl-column rl-gap-l rl-align-center rl-text-center">
+                    <div class="rl-text-m hero-note">Try it: seal a message, sign a document, wrap a key. It all runs in your browser, and nothing is sent.</div>
+                </div>
+
+                <!-- The demo: the tabs, and the window with a panel for each. The panels are in the HTML; assets/js/demo.js switches them
+                     and starts the demo's scripts when the window nears the screen. -->
+                <div class="demo rl-column rl-gap-m" data-demo>
+                    <div class="demo-tabs rl-row rl-gap-s rl-justify-center" role="tablist" aria-label="Demo">
+                        <button type="button" role="tab" class="btn btn-sm btn-secondary" id="demo-tab-seal" aria-controls="demo-panel-seal" aria-selected="true" data-file="seal">Seal</button>
+                        <button type="button" role="tab" class="btn btn-sm btn-secondary" id="demo-tab-files" aria-controls="demo-panel-files" aria-selected="false" tabindex="-1" data-file="files">Files</button>
+                        <button type="button" role="tab" class="btn btn-sm btn-secondary" id="demo-tab-account" aria-controls="demo-panel-account" aria-selected="false" tabindex="-1" data-file="account">Account</button>
+                        <button type="button" role="tab" class="btn btn-sm btn-secondary" id="demo-tab-p2p" aria-controls="demo-panel-p2p" aria-selected="false" tabindex="-1" data-file="p2p">P2P</button>
+                        <button type="button" role="tab" class="btn btn-sm btn-secondary" id="demo-tab-sign" aria-controls="demo-panel-sign" aria-selected="false" tabindex="-1" data-file="sign">Sign</button>
+                        <button type="button" role="tab" class="btn btn-sm btn-secondary" id="demo-tab-rekey" aria-controls="demo-panel-rekey" aria-selected="false" tabindex="-1" data-file="rekey">Rekey</button>
+                        <button type="button" role="tab" class="btn btn-sm btn-secondary" id="demo-tab-secret-key" aria-controls="demo-panel-secret-key" aria-selected="false" tabindex="-1" data-file="secret-key">Secret Key</button>
+                        <button type="button" role="tab" class="btn btn-sm btn-secondary" id="demo-tab-jwk" aria-controls="demo-panel-jwk" aria-selected="false" tabindex="-1" data-file="jwk">JWK</button>
+                    </div>
+
+                    <div class="demo-window">
+                        <div class="code-titlebar rl-row rl-nowrap rl-gap-m">
+                            <span class="rl-row rl-nowrap rl-gap-m" aria-hidden="true">
+                                <span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span>
+                            </span>
+                            <span class="code-filename demo-filename rl-width-fill">seal</span>
+                            <span class="badge"><span class="badge-dot"></span>Live demo</span>
+                        </div>
+                        <div class="demo-window-body rl-column rl-gap-m rl-padding-l">
+                            <p class="demo-notice" data-demo-notice role="alert" hidden></p>
+
+                            <!-- Seal -->
+                            <section role="tabpanel" id="demo-panel-seal" aria-labelledby="demo-tab-seal" class="demo-panel rl-column rl-gap-l">
+                                <p class="demo-intro">Encrypt text with a passcode. AES-256-GCM seals it, and PBKDF2 turns the passcode into the key that wraps the sealing key.</p>
+                                <div class="rl-grid rl-grid-fit-xl rl-gap-l">
+                                    <div class="demo-box rl-column rl-gap-m rl-padding-l">
+                                        <h2 class="demo-box-title">Seal</h2>
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="seal-plain">Plaintext</label>
+                                            <textarea id="seal-plain" placeholder="Enter text to encrypt…"></textarea>
+                                        </div>
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="seal-passcode">Passcode</label>
+                                            <input id="seal-passcode" type="password" autocomplete="off" placeholder="Enter passcode…" />
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="seal-btn" class="btn btn-sm btn-brand">Seal →</button>
+                                        </div>
+                                        <p id="seal-status" class="status" aria-live="polite"></p>
+                                        <hr />
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="seal-output">Encrypted payload</label>
+                                            <textarea id="seal-output" class="demo-mono" readonly placeholder="Encrypted output appears here…"></textarea>
+                                            <div class="rl-row rl-gap-s">
+                                                <button type="button" id="seal-copy" class="btn btn-sm btn-ghost" hidden>Copy</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="demo-box rl-column rl-gap-m rl-padding-l">
+                                        <h2 class="demo-box-title">Unseal</h2>
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="unseal-input">Encrypted payload</label>
+                                            <textarea id="unseal-input" class="demo-mono" placeholder="Paste the encrypted payload here…"></textarea>
+                                        </div>
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="unseal-passcode">Passcode</label>
+                                            <input id="unseal-passcode" type="password" autocomplete="off" placeholder="Enter passcode…" />
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="unseal-btn" class="btn btn-sm btn-brand">Unseal →</button>
+                                        </div>
+                                        <p id="unseal-status" class="status" aria-live="polite"></p>
+                                        <hr />
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="unseal-output">Decrypted plaintext</label>
+                                            <textarea id="unseal-output" readonly placeholder="Decrypted text appears here…"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Files -->
+                            <section role="tabpanel" id="demo-panel-files" aria-labelledby="demo-tab-files" class="demo-panel rl-column rl-gap-l" hidden>
+                                <p class="demo-intro">Encrypt or decrypt a file of up to 1 MB. The output is a <code>.cnsl</code> file that holds the original file name, the salt, the iv, the wrapped key and the ciphertext. The file stays in your browser.</p>
+                                <div class="rl-grid rl-grid-fit-xl rl-gap-l">
+                                    <div class="demo-box rl-column rl-gap-m rl-padding-l">
+                                        <h2 class="demo-box-title">Encrypt</h2>
+                                        <div class="rl-column rl-gap-s">
+                                            <span class="demo-label">File</span>
+                                            <label class="demo-drop" id="encrypt-drop">
+                                                <input type="file" id="encrypt-file" />
+                                                <span>Drop a file or <strong>click to browse</strong></span>
+                                                <span class="demo-drop-hint">Any file type. The output is a .cnsl file.</span>
+                                            </label>
+                                            <div class="demo-file-info rl-row rl-gap-m" id="encrypt-file-info" hidden>
+                                                <span id="encrypt-file-name"></span>
+                                                <span class="demo-file-size" id="encrypt-file-size"></span>
+                                            </div>
+                                        </div>
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="encrypt-passcode">Passcode</label>
+                                            <input id="encrypt-passcode" type="password" autocomplete="off" placeholder="Enter passcode…" />
+                                        </div>
+                                        <div class="demo-progress" id="encrypt-progress" aria-hidden="true" hidden>
+                                            <div class="demo-progress-fill" id="encrypt-progress-fill"></div>
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="encrypt-btn" class="btn btn-sm btn-brand">Encrypt &amp; download →</button>
+                                        </div>
+                                        <p id="encrypt-status" class="status" aria-live="polite"></p>
+                                    </div>
+                                    <div class="demo-box rl-column rl-gap-m rl-padding-l">
+                                        <h2 class="demo-box-title">Decrypt</h2>
+                                        <div class="rl-column rl-gap-s">
+                                            <span class="demo-label">Encrypted file (.cnsl)</span>
+                                            <label class="demo-drop" id="decrypt-drop">
+                                                <input type="file" id="decrypt-file" accept=".cnsl" />
+                                                <span>Drop a <strong>.cnsl</strong> file or click to browse</span>
+                                                <span class="demo-drop-hint">One that the Encrypt box made.</span>
+                                            </label>
+                                            <div class="demo-file-info rl-row rl-gap-m" id="decrypt-file-info" hidden>
+                                                <span id="decrypt-file-name"></span>
+                                                <span class="demo-file-size" id="decrypt-file-size"></span>
+                                            </div>
+                                        </div>
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="decrypt-passcode">Passcode</label>
+                                            <input id="decrypt-passcode" type="password" autocomplete="off" placeholder="Enter passcode…" />
+                                        </div>
+                                        <div class="demo-progress" id="decrypt-progress" aria-hidden="true" hidden>
+                                            <div class="demo-progress-fill" id="decrypt-progress-fill"></div>
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="decrypt-btn" class="btn btn-sm btn-brand">Decrypt &amp; download →</button>
+                                        </div>
+                                        <p id="decrypt-status" class="status" aria-live="polite"></p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Account -->
+                            <section role="tabpanel" id="demo-panel-account" aria-labelledby="demo-tab-account" class="demo-panel rl-column rl-gap-l" hidden>
+                                <p class="demo-intro">Make an account key backed by a BIP-39 mnemonic, a phrase of 24 words. Seal a message with it, then recover the key from the words alone and open the message: that shows the recovery works.</p>
+                                <div class="rl-column rl-gap-m rl-width-l rl-center-self">
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l">
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" id="account-num-1" aria-hidden="true">1</span>
+                                            <h2 class="demo-step-title">Create the account</h2>
+                                        </div>
+                                        <div class="rl-row rl-gap-m rl-align-end">
+                                            <div class="rl-column rl-gap-s rl-width-fill">
+                                                <label for="account-pass">Passphrase (wraps the key for storage)</label>
+                                                <input id="account-pass" type="password" autocomplete="off" placeholder="Enter passphrase…" />
+                                            </div>
+                                            <button type="button" id="account-create" class="btn btn-sm btn-brand">Create →</button>
+                                        </div>
+                                        <p id="account-create-status" class="status" aria-live="polite"></p>
+                                        <div id="account-created" class="rl-column rl-gap-m" hidden>
+                                            <hr />
+                                            <p class="demo-notice">Save these 24 words. They are the only way to get the account key back if you forget the passphrase.</p>
+                                            <div class="rl-column rl-gap-s">
+                                                <div class="rl-row rl-nowrap rl-justify-between rl-gap-m">
+                                                    <label for="account-mnemonic">Recovery mnemonic (24 words)</label>
+                                                    <button type="button" id="account-copy-mnemonic" class="btn btn-sm btn-ghost">Copy</button>
+                                                </div>
+                                                <textarea id="account-mnemonic" class="demo-mono" readonly rows="3"></textarea>
+                                            </div>
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="account-wrapped">Wrapped key (what you would store)</label>
+                                                <textarea id="account-wrapped" class="demo-mono" readonly rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="demo-connector">seal a message with the account key</p>
+
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l" id="account-step-seal" inert>
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" id="account-num-2" aria-hidden="true">2</span>
+                                            <h2 class="demo-step-title">Seal a message</h2>
+                                        </div>
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="account-message">Message</label>
+                                            <textarea id="account-message" rows="3" placeholder="Enter a secret message…"></textarea>
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="account-seal" class="btn btn-sm btn-brand">Seal →</button>
+                                        </div>
+                                        <p id="account-seal-status" class="status" aria-live="polite"></p>
+                                        <div id="account-sealed" class="rl-column rl-gap-m" hidden>
+                                            <hr />
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="account-sealed-output">Sealed payload</label>
+                                                <textarea id="account-sealed-output" class="demo-mono" readonly rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="demo-connector">lose the key, then recover it from the mnemonic</p>
+
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l" id="account-step-recover" inert>
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" id="account-num-3" aria-hidden="true">3</span>
+                                            <h2 class="demo-step-title">Recover and unseal</h2>
+                                        </div>
+                                        <div class="rl-column rl-gap-s">
+                                            <div class="rl-row rl-nowrap rl-justify-between rl-gap-m">
+                                                <label for="account-recover-mnemonic">Recovery mnemonic</label>
+                                                <button type="button" id="account-fill-mnemonic" class="btn btn-sm btn-ghost" hidden>Fill from step 1</button>
+                                            </div>
+                                            <textarea id="account-recover-mnemonic" class="demo-mono" rows="3" placeholder="Enter your 24 recovery words…"></textarea>
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="account-recover" class="btn btn-sm btn-brand">Recover &amp; unseal →</button>
+                                        </div>
+                                        <p id="account-recover-status" class="status" aria-live="polite"></p>
+                                        <div id="account-recovered" class="rl-column rl-gap-m" hidden>
+                                            <hr />
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="account-recovered-output">Recovered plaintext</label>
+                                                <textarea id="account-recovered-output" readonly rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- P2P -->
+                            <section role="tabpanel" id="demo-panel-p2p" aria-labelledby="demo-tab-p2p" class="demo-panel rl-column rl-gap-l" hidden>
+                                <p class="demo-intro">Alice and Bob each have an ECDH key pair, to encrypt to, and an ECDSA key pair, to sign with. Alice seals a message to Bob's public key and signs it. Bob checks her signature and opens it with his private key.</p>
+                                <div class="demo-p2p">
+                                    <div class="demo-box rl-column rl-gap-m rl-padding-l">
+                                        <h2 class="demo-box-title">Alice</h2>
+                                        <p class="demo-label">Identity</p>
+                                        <dl class="demo-readout" id="alice-keys" hidden>
+                                            <div class="demo-readout-row"><dt>ECDH public</dt><dd id="alice-ecdh-thumb">—</dd></div>
+                                            <div class="demo-readout-row"><dt>ECDSA public</dt><dd id="alice-ecdsa-thumb">—</dd></div>
+                                            <div class="demo-readout-row"><dt>Private keys</dt><dd>kept in memory</dd></div>
+                                        </dl>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="alice-keygen" class="btn btn-sm btn-brand">Generate key pair</button>
+                                        </div>
+                                        <p id="alice-keygen-status" class="status" aria-live="polite"></p>
+                                        <hr />
+                                        <p class="demo-label">Compose</p>
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="alice-message">Message to Bob</label>
+                                            <textarea id="alice-message" placeholder="Type a message for Bob…" disabled></textarea>
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="alice-send" class="btn btn-sm btn-brand" disabled>Seal &amp; sign →</button>
+                                        </div>
+                                        <p id="alice-send-status" class="status" aria-live="polite"></p>
+                                    </div>
+
+                                    <div class="demo-arrow" aria-hidden="true">
+                                        <span class="demo-arrow-mark">→</span>
+                                        <span>sealed</span>
+                                        <span>and signed</span>
+                                    </div>
+
+                                    <div class="demo-box rl-column rl-gap-m rl-padding-l">
+                                        <h2 class="demo-box-title">Bob</h2>
+                                        <p class="demo-label">Identity</p>
+                                        <dl class="demo-readout" id="bob-keys" hidden>
+                                            <div class="demo-readout-row"><dt>ECDH public</dt><dd id="bob-ecdh-thumb">—</dd></div>
+                                            <div class="demo-readout-row"><dt>ECDSA public</dt><dd id="bob-ecdsa-thumb">—</dd></div>
+                                            <div class="demo-readout-row"><dt>Private keys</dt><dd>kept in memory</dd></div>
+                                        </dl>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="bob-keygen" class="btn btn-sm btn-brand">Generate key pair</button>
+                                        </div>
+                                        <p id="bob-keygen-status" class="status" aria-live="polite"></p>
+                                        <hr />
+                                        <p class="demo-label">Received packet</p>
+                                        <dl class="demo-readout" id="p2p-packet" hidden>
+                                            <div class="demo-readout-row"><dt>ciphertext</dt><dd id="p2p-ciphertext">—</dd></div>
+                                            <div class="demo-readout-row"><dt>iv</dt><dd id="p2p-iv">—</dd></div>
+                                            <div class="demo-readout-row"><dt>ephemeral public</dt><dd id="p2p-ephemeral">—</dd></div>
+                                            <div class="demo-readout-row"><dt>signature</dt><dd id="p2p-signature">—</dd></div>
+                                            <div class="demo-readout-row"><dt>sender</dt><dd>Alice</dd></div>
+                                        </dl>
+                                        <p class="demo-note" id="p2p-packet-empty">No message received yet.</p>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="p2p-unseal" class="btn btn-sm btn-brand" disabled>Verify &amp; unseal</button>
+                                            <button type="button" id="p2p-tamper" class="btn btn-sm btn-ghost btn-danger" disabled>Tamper signature</button>
+                                        </div>
+                                        <div class="demo-verdict rl-row rl-nowrap rl-gap-m rl-align-start" id="p2p-verdict" role="status" hidden>
+                                            <span class="demo-verdict-icon" aria-hidden="true"></span>
+                                            <div class="rl-column rl-gap-xs">
+                                                <span class="demo-verdict-headline"></span>
+                                                <span class="demo-verdict-detail"></span>
+                                            </div>
+                                        </div>
+                                        <p id="p2p-unseal-status" class="status" aria-live="polite"></p>
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="p2p-received">Decrypted message</label>
+                                            <textarea id="p2p-received" readonly placeholder="The decrypted message appears here…"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Sign -->
+                            <section role="tabpanel" id="demo-panel-sign" aria-labelledby="demo-tab-sign" class="demo-panel rl-column rl-gap-l" hidden>
+                                <p class="demo-intro">Make an ECDSA P-256 key pair, sign a document with the private key, then verify the signature with the public key. Change the document or the signature to see verification fail.</p>
+                                <div class="rl-column rl-gap-m rl-width-l rl-center-self">
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l">
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" aria-hidden="true">1</span>
+                                            <h2 class="demo-step-title">Make a signing key pair</h2>
+                                        </div>
+                                        <dl class="demo-readout" id="sign-keys" hidden>
+                                            <div class="demo-readout-row"><dt>public key</dt><dd id="sign-pub-thumb">—</dd></div>
+                                            <div class="demo-readout-row"><dt>private key</dt><dd>kept in memory, never exported</dd></div>
+                                        </dl>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="sign-keygen" class="btn btn-sm btn-brand">Generate key pair</button>
+                                            <button type="button" id="sign-regenerate" class="btn btn-sm btn-ghost" hidden>Regenerate</button>
+                                        </div>
+                                        <p id="sign-keygen-status" class="status" aria-live="polite"></p>
+                                    </div>
+
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l">
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" aria-hidden="true">2</span>
+                                            <h2 class="demo-step-title">Sign a document</h2>
+                                        </div>
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="sign-document">Document</label>
+                                            <textarea id="sign-document" rows="5" placeholder="Type or paste a document to sign…" disabled></textarea>
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="sign-sign" class="btn btn-sm btn-brand" disabled>Sign →</button>
+                                        </div>
+                                        <p id="sign-status" class="status" aria-live="polite"></p>
+                                        <dl class="demo-readout" id="sign-sig-box" hidden>
+                                            <div class="demo-readout-row"><dt>algorithm</dt><dd>ECDSA P-256 / SHA-256</dd></div>
+                                            <div class="demo-readout-row"><dt>signed over</dt><dd id="sign-sig-hash">—</dd></div>
+                                            <div class="demo-readout-row"><dt>signature</dt><dd id="sign-sig-value">—</dd></div>
+                                        </dl>
+                                    </div>
+
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l" id="sign-step-tamper" hidden>
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" aria-hidden="true">3</span>
+                                            <h2 class="demo-step-title">Tamper before you verify (optional)</h2>
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="sign-tamper-doc" class="btn btn-sm btn-ghost btn-danger">Tamper document</button>
+                                            <button type="button" id="sign-tamper-sig" class="btn btn-sm btn-ghost btn-danger">Tamper signature</button>
+                                            <button type="button" id="sign-restore" class="btn btn-sm btn-ghost" hidden>Restore original</button>
+                                        </div>
+                                        <p id="sign-tamper-status" class="status" aria-live="polite"></p>
+                                    </div>
+
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l" id="sign-step-verify" hidden>
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" aria-hidden="true">4</span>
+                                            <h2 class="demo-step-title">Verify the signature</h2>
+                                        </div>
+                                        <p class="demo-note">Verification uses the <strong>public key</strong> only. The private key plays no part in it.</p>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="sign-verify" class="btn btn-sm btn-brand">Verify →</button>
+                                        </div>
+                                        <div class="demo-verdict rl-row rl-nowrap rl-gap-m rl-align-start" id="sign-verdict" role="status" hidden>
+                                            <span class="demo-verdict-icon" aria-hidden="true"></span>
+                                            <div class="rl-column rl-gap-xs">
+                                                <span class="demo-verdict-headline"></span>
+                                                <span class="demo-verdict-detail"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Rekey -->
+                            <section role="tabpanel" id="demo-panel-rekey" aria-labelledby="demo-tab-rekey" class="demo-panel rl-column rl-gap-l" hidden>
+                                <p class="demo-intro">Change the passphrase that protects an account key. The key itself never changes, so what was sealed before the rekey still opens with the new passphrase.</p>
+                                <div class="rl-column rl-gap-m rl-width-l rl-center-self">
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l">
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" id="rekey-num-1" aria-hidden="true">1</span>
+                                            <h2 class="demo-step-title">Create an account key</h2>
+                                        </div>
+                                        <div class="rl-grid rl-grid-fit-m rl-gap-m">
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="rekey-pass">Initial passphrase</label>
+                                                <input id="rekey-pass" type="password" autocomplete="off" placeholder="Current passphrase…" />
+                                            </div>
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="rekey-message">Message to seal</label>
+                                                <input id="rekey-message" type="text" autocomplete="off" placeholder="A secret to protect…" />
+                                            </div>
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="rekey-create" class="btn btn-sm btn-brand">Create &amp; seal →</button>
+                                        </div>
+                                        <p id="rekey-create-status" class="status" aria-live="polite"></p>
+                                        <div id="rekey-created" class="rl-column rl-gap-m" hidden>
+                                            <hr />
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="rekey-blob-before">Wrapped key (before the rekey)</label>
+                                                <textarea id="rekey-blob-before" class="demo-mono" readonly></textarea>
+                                            </div>
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="rekey-sealed">Sealed message</label>
+                                                <textarea id="rekey-sealed" class="demo-mono" readonly></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="demo-connector">now change the passphrase</p>
+
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l" id="rekey-step-rekey" inert>
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" id="rekey-num-2" aria-hidden="true">2</span>
+                                            <h2 class="demo-step-title">Rekey</h2>
+                                        </div>
+                                        <p class="demo-note">The account key stays the same and only its wrapping changes. PBKDF2 runs twice: once to unwrap with the old passphrase, once to wrap again with the new one.</p>
+                                        <div class="rl-grid rl-grid-fit-m rl-gap-m">
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="rekey-old-pass">Old passphrase</label>
+                                                <input id="rekey-old-pass" type="password" autocomplete="off" placeholder="Old passphrase…" />
+                                            </div>
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="rekey-new-pass">New passphrase</label>
+                                                <input id="rekey-new-pass" type="password" autocomplete="off" placeholder="New passphrase…" />
+                                            </div>
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="rekey-run" class="btn btn-sm btn-brand">Rekey →</button>
+                                        </div>
+                                        <p id="rekey-status" class="status" aria-live="polite"></p>
+                                        <div id="rekey-result" class="rl-column rl-gap-m" hidden>
+                                            <hr />
+                                            <div class="rl-grid rl-grid-fit-m rl-gap-m">
+                                                <div class="rl-column rl-gap-s">
+                                                    <label for="rekey-compare-before">Before (old passphrase)</label>
+                                                    <textarea id="rekey-compare-before" class="demo-mono" readonly></textarea>
+                                                </div>
+                                                <div class="rl-column rl-gap-s">
+                                                    <label for="rekey-compare-after">After (new passphrase)</label>
+                                                    <textarea id="rekey-compare-after" class="demo-mono" readonly></textarea>
+                                                </div>
+                                            </div>
+                                            <p class="demo-note">Different bytes: a new random salt, and a wrapping key made from the new passphrase. The account key inside is the same, so what was sealed before still decrypts.</p>
+                                        </div>
+                                    </div>
+
+                                    <p class="demo-connector">check that the old content still opens</p>
+
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l" id="rekey-step-verify" inert>
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" id="rekey-num-3" aria-hidden="true">3</span>
+                                            <h2 class="demo-step-title">Unseal with the new passphrase</h2>
+                                        </div>
+                                        <p class="demo-note">The message was sealed before the rekey. Unseal it now with only the new passphrase and the new wrapped key.</p>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="rekey-verify" class="btn btn-sm btn-brand">Unseal →</button>
+                                        </div>
+                                        <p id="rekey-verify-status" class="status" aria-live="polite"></p>
+                                        <div id="rekey-verified" class="rl-column rl-gap-m" hidden>
+                                            <hr />
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="rekey-verify-output">Decrypted message</label>
+                                                <textarea id="rekey-verify-output" readonly></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Secret Key -->
+                            <section role="tabpanel" id="demo-panel-secret-key" aria-labelledby="demo-tab-secret-key" class="demo-panel rl-column rl-gap-l" hidden>
+                                <p class="demo-intro">A 128-bit Secret Key is a second factor for wrapping the account key. Neither the passphrase nor the Secret Key alone can unwrap it.</p>
+                                <div class="rl-column rl-gap-m rl-width-l rl-center-self">
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l">
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" id="sk-num-1" aria-hidden="true">1</span>
+                                            <h2 class="demo-step-title">Wrap with the passphrase and a Secret Key</h2>
+                                        </div>
+                                        <p class="demo-note">A random 128-bit Secret Key is made. The account key is wrapped with the passphrase and the Secret Key together, so PBKDF2 never sees the passphrase alone.</p>
+                                        <div class="rl-grid rl-grid-fit-m rl-gap-m">
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="sk-pass">Passphrase</label>
+                                                <input id="sk-pass" type="password" autocomplete="off" placeholder="Enter a passphrase…" />
+                                            </div>
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="sk-message">Message to seal</label>
+                                                <input id="sk-message" type="text" autocomplete="off" placeholder="A secret to protect…" />
+                                            </div>
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="sk-create" class="btn btn-sm btn-brand">Make a Secret Key &amp; wrap →</button>
+                                        </div>
+                                        <p id="sk-create-status" class="status" aria-live="polite"></p>
+                                        <div id="sk-created" class="rl-column rl-gap-m" hidden>
+                                            <hr />
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="sk-key">Secret Key (base64, kept on the device)</label>
+                                                <textarea id="sk-key" class="demo-mono" readonly rows="2"></textarea>
+                                            </div>
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="sk-blob">Wrapped key</label>
+                                                <textarea id="sk-blob" class="demo-mono" readonly></textarea>
+                                            </div>
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="sk-sealed">Sealed message</label>
+                                                <textarea id="sk-sealed" class="demo-mono" readonly></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="demo-connector">prove that both factors are needed</p>
+
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l" id="sk-step-unlock" inert>
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" id="sk-num-2" aria-hidden="true">2</span>
+                                            <h2 class="demo-step-title">Unlock with the right credentials</h2>
+                                        </div>
+                                        <p class="demo-note">The same passphrase and Secret Key as in step 1. They unwrap the account key, and it opens the sealed message.</p>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="sk-unlock" class="btn btn-sm btn-brand">Unlock &amp; decrypt →</button>
+                                        </div>
+                                        <p id="sk-unlock-status" class="status" aria-live="polite"></p>
+                                        <div id="sk-unlocked" class="rl-column rl-gap-m" hidden>
+                                            <hr />
+                                            <div class="rl-column rl-gap-s">
+                                                <label for="sk-unlock-output">Decrypted message</label>
+                                                <textarea id="sk-unlock-output" readonly></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="demo-connector">now try without the Secret Key</p>
+
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l" id="sk-step-attack" inert>
+                                        <div class="rl-row rl-nowrap rl-gap-m">
+                                            <span class="demo-step-num" id="sk-num-3" aria-hidden="true">3</span>
+                                            <h2 class="demo-step-title">Try a wrong Secret Key</h2>
+                                        </div>
+                                        <p class="demo-note">The passphrase is right, but a freshly made, wrong Secret Key takes the place of the real one. Unwrapping has to fail: the passphrase alone is not enough.</p>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="sk-attack" class="btn btn-sm btn-brand">Try a wrong Secret Key →</button>
+                                        </div>
+                                        <p id="sk-attack-status" class="status" aria-live="polite"></p>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- JWK -->
+                            <section role="tabpanel" id="demo-panel-jwk" aria-labelledby="demo-tab-jwk" class="demo-panel rl-column rl-gap-l" hidden>
+                                <p class="demo-intro">Make or paste a JSON Web Key. The inspector checks it, decodes every field, and takes a SHA-256 fingerprint of the raw public point.</p>
+                                <div class="rl-column rl-gap-m rl-width-l rl-center-self">
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l">
+                                        <h2 class="demo-step-title">Key input</h2>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="jwk-gen-ecdh" class="btn btn-sm btn-ghost">Generate ECDH P-256</button>
+                                            <button type="button" id="jwk-gen-ecdsa" class="btn btn-sm btn-ghost">Generate ECDSA P-256</button>
+                                        </div>
+                                        <div class="rl-column rl-gap-s">
+                                            <label for="jwk-input">JWK (public key JSON)</label>
+                                            <textarea id="jwk-input" class="demo-mono" placeholder='{"kty":"EC","crv":"P-256","x":"…","y":"…"}'></textarea>
+                                        </div>
+                                        <div class="rl-row rl-gap-s">
+                                            <button type="button" id="jwk-inspect" class="btn btn-sm btn-brand">Inspect →</button>
+                                            <button type="button" id="jwk-clear" class="btn btn-sm btn-ghost">Clear</button>
+                                        </div>
+                                        <p id="jwk-status" class="status" aria-live="polite"></p>
+                                    </div>
+
+                                    <div class="demo-step rl-column rl-gap-m rl-padding-l" id="jwk-result" hidden>
+                                        <h2 class="demo-step-title">Inspection result</h2>
+                                        <dl class="demo-fields" id="jwk-fields"></dl>
+                                        <hr />
+                                        <div class="rl-column rl-gap-s">
+                                            <span class="demo-label">SHA-256 fingerprint (hex)</span>
+                                            <p class="demo-fingerprint" id="jwk-fingerprint"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-sunken">
+            <div class="container rl-column rl-gap-2xl">
+                <p class="section-label rl-text-center">Highlights</p>
+                <div class="rl-grid rl-grid-fit-2xl rl-gap-l">
+                    <div class="doc-card">
+                        <div class="doc-card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                        <p class="doc-card-title">Sealed on the device</p>
+                        <p class="doc-card-body">Each record is encrypted with AES-256-GCM on the browser's own SubtleCrypto before it leaves. The server holds ciphertext, wrapped keys, salts and public keys, and nothing it can read.</p>
+                    </div>
+                    <div class="doc-card">
+                        <div class="doc-card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                        </div>
+                        <p class="doc-card-title">Two factors and a recovery phrase</p>
+                        <p class="doc-card-body">The account key is wrapped under a passphrase and a Secret Key kept on the device. A 24-word BIP-39 phrase, shown once, recovers it when both are lost.</p>
+                    </div>
+                    <div class="doc-card">
+                        <div class="doc-card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                        </div>
+                        <p class="doc-card-title">Devices join by approval</p>
+                        <p class="doc-card-body">A new device gets the key only when the user sees the same code on it and on a device that already holds the key, and confirms they match. The ceremony's screens come as Lit components.</p>
+                    </div>
+                    <div class="doc-card">
+                        <div class="doc-card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                        </div>
+                        <p class="doc-card-title">Sync that merges on the client</p>
+                        <p class="doc-card-body"><code>SyncEngine</code> moves a user's records between their devices through your backend. The server orders ciphertext, and merging runs on the client, on plaintext.</p>
+                    </div>
+                    <div class="doc-card">
+                        <div class="doc-card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <p class="doc-card-title">Channels between users</p>
+                        <p class="doc-card-body">A channel shares one key across users. Each member holds it wrapped under their own circle key, so every device in a member's circle opens it.</p>
+                    </div>
+                    <div class="doc-card">
+                        <div class="doc-card-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                        </div>
+                        <p class="doc-card-title">A backend to match</p>
+                        <p class="doc-card-body"><code>ConsealDev.Conseal</code> serves the sync and circle routes for ASP.NET Core. The OpenAPI spec is the contract for a backend in any other language.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- The product sites' footer (product-footer in the portal): no .container, so the columns line up under
+             the header's logo, inside the same gutter -->
+        <div class="footer-columns">
+            <div class="rl-grid rl-grid-fit-m rl-gap-xl">
+                <div class="rl-column rl-gap-s">
+                    <a href="./" class="footer-logo">
+                        <img src="assets/images/conseal-mark.svg" alt="" class="footer-logo-mark" />
+                        <span class="footer-logo-word" translate="no">Conseal</span>
+                    </a>
+                    <p class="footer-tagline">Privacy as design</p>
+                </div>
+                <div class="rl-column rl-gap-s">
+                    <span class="footer-heading">Packages</span>
+                    <div class="rl-column rl-gap-m footer-links">
+                        <a href="docs/core/overview/">JavaScript</a>
+                        <a href="docs/dotnet/overview/">ASP.NET Core</a>
+                    </div>
+                </div>
+                <div class="rl-column rl-gap-s">
+                    <span class="footer-heading">Documentation</span>
+                    <div class="rl-column rl-gap-m footer-links">
+                        <a href="docs/start/introduction/">Introduction</a>
+                        <a href="docs/concepts/keys/">Concepts</a>
+                        <a href="docs/security/threat-model/">Threat model</a>
+                        <a href="docs/api/overview/">API</a>
+                    </div>
+                </div>
+                <div class="rl-column rl-gap-s">
+                    <span class="footer-heading">Company</span>
+                    <div class="rl-column rl-gap-m footer-links">
+                        <a href="license/">License</a>
+                        <a href="https://my.codesense.dev/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+                        <a href="https://my.codesense.dev/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-baseline">
+            <p class="footer-copy">© 2026 Codesense LLC</p>
+        </div>
+    </footer>
+</body>
+</html>
